@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'test_controller = tb4_controller.test_controller:main'
+            'test_controller = tb4_controller.test_controller:main',
+            'multirobot_test_controller = tb4_controller.multirobot_test_controller:main'
         ],
     },
 )
