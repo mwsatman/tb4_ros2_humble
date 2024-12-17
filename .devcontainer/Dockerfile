@@ -24,8 +24,11 @@ RUN sudo usermod --append --groups video $USERNAME
 # Update all packages
 RUN sudo apt update && sudo apt upgrade -y
 
-# Install Git
-RUN sudo apt install -y git
+# Install additional software
+RUN sudo apt install -y \
+    git \
+    ros-${ROS_DISTRO}-vrpn-mocap \
+    iputils-ping iproute2 
 
 # Rosdep update
 RUN rosdep update
@@ -41,4 +44,4 @@ RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
 RUN echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
 RUN echo "[ -t 0 ] && export ROS_SUPER_CLIENT=True || export ROS_SUPER_CLIENT=False" >> ~/.bashrc
 RUN echo "export ROS_DOMAIN_ID=0" >> ~/.bashrc
-RUN echo "export ROS_DISCOVERY_SERVER=';192.168.50.201:11811;192.168.50.202:11811;192.168.50.203:11811;;192.168.50.205:11811;'" >> ~/.bashrc
+RUN echo "export ROS_DISCOVERY_SERVER='172.17.0.1:11811;192.168.50.201:11811;192.168.50.202:11811;192.168.50.203:11811;;192.168.50.205:11811;'" >> ~/.bashrc
